@@ -7,13 +7,12 @@ The live website showcases the club's vision, mission, past events, and introduc
 ## ✨ Features
 
 * **Homepage**: Engaging introduction with a dynamic image carousel.
-    * One of the carousel slides links to a video showcasing AIUB's [Boishakh Utshab 1431 celebrations](https://www.youtube.com/watch?v=jIqyxYjVANY&t=1s).
 * **Vision & Mission**: Clearly defined goals and objectives of the club.
 * **About Us**: Detailed information about the club's purpose and activities.
 * **Event Gallery**: A visually appealing gallery of past events with an auto-scrolling feature.
 * **Our Teams**: Highlights the different operational teams within the club:
     * Communication Team
-    * Public-Relations Team
+    * Public Relations Team
     * Content & Media Team
     * Logistics Team
     * Management Team
