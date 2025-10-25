@@ -1,0 +1,284 @@
+/* ==================== PAGE HERO ==================== */
+.page-hero {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+    position: relative;
+}
+
+.page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 54px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.page-hero p {
+    font-size: 20px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        height: 200px;
+    }
+
+    .page-hero h1 {
+        font-size: 36px;
+    }
+
+    .page-hero p {
+        font-size: 16px;
+    }
+}
+
+/* ==================== PAGE CONTENT ==================== */
+.page-content {
+    padding: 80px 0;
+    background: white;
+}
+
+.content-wrapper {
+    max-width: 900px;
+}
+
+/* ==================== RULES STYLING ==================== */
+.rules-section {
+    margin-bottom: 50px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 5px solid #E8453C;
+}
+
+.rules-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2C3E50;
+}
+
+.rules-section i {
+    color: #E8453C;
+}
+
+.rules-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.rules-section li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    line-height: 1.8;
+    color: #555;
+}
+
+.rules-section li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #E8453C;
+    font-weight: bold;
+}
+
+.important-note {
+    background: linear-gradient(135deg, #E8453C15, #2C3E5015);
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #E8453C;
+    margin-top: 50px;
+}
+
+.important-note h3 {
+    color: #E8453C;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.important-note p {
+    color: #555;
+    line-height: 1.8;
+}
+
+/* ==================== EVENTS GRID ==================== */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.event-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.1);
+}
+
+.event-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.event-info {
+    padding: 25px;
+}
+
+.event-info h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #2C3E50;
+}
+
+.event-date {
+    color: #E8453C;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.event-date i {
+    margin-right: 6px;
+}
+
+.event-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== TEAM GRID ==================== */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+.team-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.member-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .member-image img {
+    transform: scale(1.05);
+}
+
+.member-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.member-info h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #2C3E50;
+}
+
+.member-info .position {
+    color: #E8453C;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.member-info .bio {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== TEXT UTILITIES ==================== */
+.text-center {
+    text-align: center;
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .page-content {
+        padding: 60px 0;
+    }
+
+    .rules-section {
+        padding: 20px;
+    }
+
+    .rules-section h3 {
+        font-size: 20px;
+    }
+
+    .event-card,
+    .team-card {
+        animation-delay: 0.1s;
+    }
+}

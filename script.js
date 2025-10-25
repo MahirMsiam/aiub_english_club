@@ -1,152 +1,160 @@
-document.addEventListener("DOMContentLoaded", () => {
+// ==================== GALLERY INFINITE SCROLL ANIMATION ====================
+const galleryCarousel = document.getElementById('galleryCarousel');
+if (galleryCarousel) {
+    const items = galleryCarousel.querySelectorAll('.gallery-item');
+    let scrollSpeed = 2; // pixels per frame
+    let autoScrollInterval;
+    let isPaused = false;
 
-  //Event Shows
-    const gallery = document.querySelector('.gallery-grid');  // Use class instead of ID
-    let scrollInterval;
-    let scrollAmount = 0;
+    // Clone items for infinite effect
+    function createInfiniteScroll() {
+        const itemsToClone = Array.from(items);
+        itemsToClone.forEach(item => {
+            const clone = item.cloneNode(true);
+            galleryCarousel.appendChild(clone);
+        });
+    }
 
-    if (gallery) {
-        function autoScroll() {
-            scrollInterval = setInterval(() => {
-                // Scroll the gallery to the right
-                if (scrollAmount < gallery.scrollWidth - gallery.clientWidth) {
-                    scrollAmount += 2; 
-                    gallery.scrollTo({
-                        left: scrollAmount, 
-                        behavior: 'smooth'  
-                    });
-                } else {
-                    scrollAmount = 0; 
-                    gallery.scrollTo({
-                        left: 0, 
-                        behavior: 'smooth'  
-                    });
-                }
-            }, 20); // Adjust interval for smoothness
+    createInfiniteScroll();
+
+    // Auto scroll functionality with smooth animation
+    function autoScroll() {
+        if (!isPaused) {
+            galleryCarousel.scrollLeft += scrollSpeed;
+
+            // Reset to beginning when reaching near the end for infinite effect
+            if (galleryCarousel.scrollLeft >= galleryCarousel.scrollWidth / 2 - 10) {
+                galleryCarousel.scrollLeft = 0;
+            }
         }
-
-        // Start the auto-scrolling
-        autoScroll();
-    } else {
-        console.warn("Gallery element not found.");
     }
 
+    // Start auto scroll
+    autoScrollInterval = setInterval(autoScroll, 30);
 
-// Registration section
-const registrationOpen = false; // True if registration is open, false if closed
-
-window.onload = () => {
-  const joinSection = document.getElementById('join-section');
-  if (!registrationOpen) {
-    joinSection.style.display = 'none';
-  } else {
-    joinSection.style.display = 'block';
-  }
-};
-
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwYugd7010oXSu2J5ZcffRe9En1NUVeF0PJHWxgnMGoMrVapcx1dKbEbJq-In1vPDOl/exec';
-
-document.getElementById('joinForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const form = new FormData(this);
-  const selectedCategories = [];
-
-  for (const entry of form.entries()) {
-    if (entry[0] === 'category') selectedCategories.push(entry[1]);
-  }
-
-  form.delete('category');
-  form.append('category', selectedCategories.join(', '));
-
-  fetch(scriptURL, {
-    method: 'POST',
-    body: form
-  }).then(res => {
-    document.getElementById('joinForm').style.display = 'none';
-    document.getElementById('thankYou').classList.remove('hidden');
-  }).catch(err => {
-    alert("Error: " + err.message);
-  });
-});
-
-//Our Teams
-  const cards = document.querySelectorAll('.fade-in');
-
-  const fadeInObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // Animate only once
-      }
+    // Pause on hover
+    galleryCarousel.addEventListener('mouseenter', () => {
+        isPaused = true;
     });
-  }, {
-    threshold: 0.3 
-  });
 
-  cards.forEach(card => {
-    fadeInObserver.observe(card);
-  });
+    galleryCarousel.addEventListener('mouseleave', () => {
+        isPaused = false;
+    });
 
-    // Current Members Show
-  const counters = document.querySelectorAll('.number');
-  const speed = 1000;
+    // Pause on touch
+    galleryCarousel.addEventListener('touchstart', () => {
+        isPaused = true;
+    });
 
-  function animateCounters() {
-    counters.forEach(counter => {
-      const target = +counter.getAttribute('data-target');
-      let count = 0;
+    galleryCarousel.addEventListener('touchend', () => {
+        isPaused = false;
+    });
 
-      const update = () => {
-        const increment = Math.ceil(target / speed);
-        if (count < target) {
-          count += increment;
-          counter.innerText = count > target ? target : count;
-          setTimeout(update, 20);
-        } else {
-          counter.innerText = target + "+";
+    // Resume scroll on focus
+    window.addEventListener('focus', () => {
+        isPaused = false;
+    });
+
+    window.addEventListener('blur', () => {
+        isPaused = true;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Hamburger menu toggle
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Check if it's a dropdown toggle
+            if (link.classList.contains('dropdown-toggle')) {
+                e.preventDefault();
+                const dropdown = link.parentElement;
+                dropdown.classList.toggle('active');
+            } else {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    // Handle dropdown clicks on mobile
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', (e) => {
+            if (e.target.classList.contains('dropdown-toggle')) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar')) {
+            navMenu.classList.remove('active');
+            dropdowns.forEach(d => d.classList.remove('active'));
         }
-      };
-
-      update();
     });
-  }
 
-  // Reset counters to 0
-  function resetCounters() {
-    counters.forEach(counter => {
-      counter.innerText = "0";
+    // ==================== HERO CAROUSEL ====================
+    const heroCarousel = document.getElementById('heroCarousel');
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+        heroSlides.forEach(slide => slide.classList.remove('active'));
+        heroSlides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % heroSlides.length;
+        showSlide(currentSlide);
+    }
+
+    function startCarousel() {
+        slideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopCarousel() {
+        clearInterval(slideInterval);
+    }
+
+    startCarousel();
+
+    heroCarousel.addEventListener('mouseenter', stopCarousel);
+    heroCarousel.addEventListener('mouseleave', startCarousel);
+
+    // ==================== SMOOTH SCROLL ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && document.querySelector(href)) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
-  }
-  // Observer logic
-  const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounters();
-    } else {
-      resetCounters();
-    }
-  });
-}, { threshold: 0.5 });
 
-counterObserver.observe(document.querySelector('.stats-section'));
-
-//Our Teams
-const teamWorks = document.querySelectorAll('.teams-section .work');
-
-const teamObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('reveal');
-    } else {
-      entry.target.classList.remove('reveal');
-    }
-  });
-}, {
-  threshold: 0.2,
+    // ==================== CONTACT FORM ====================
+    const contactForm = document.getElementById('contactForm');
 });
 
-teamWorks.forEach(work => {
-  teamObserver.observe(work);
-});
+// ==================== MOBILE RESPONSIVENESS ====================
+window.addEventListener('resize', () => {
+    const navMenu = document.getElementById('navMenu');
+    if (window.innerWidth > 768) {
+        navMenu.classList.remove('active');
+    }
 });

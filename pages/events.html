@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - AIUB English Club</title>
+    <link rel="icon" type="image/png" href="../Images/logo-white.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../Images/logo-white.png" alt="AIUB English Club" class="logo-img">
+                <span class="logo-text">AIUB English Club</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">About</a>
+                    <div class="dropdown-menu">
+                        <a href="../index.html#about" class="dropdown-link">About the Club</a>
+                        <a href="rules.html" class="dropdown-link">Rules & Regulations</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">People</a>
+                    <div class="dropdown-menu">
+                        <a href="executives.html" class="dropdown-link">Executive Committee</a>
+                        <a href="previous-ec.html" class="dropdown-link">Previous EC</a>
+                        <a href="mentors.html" class="dropdown-link">Mentors</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="events.html" class="nav-link">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html#gallery" class="nav-link">Gallery</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background: linear-gradient(135deg, #E8453C 0%, #2C3E50 100%);">
+        <div class="hero-content">
+            <h1>Our Events</h1>
+            <p>Discover all the amazing activities and events we organize</p>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="page-content">
+        <div class="container">
+            <div class="events-grid" id="eventsGrid">
+                <!-- Event cards will be generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="../index.html#gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/aiubenglishclub"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/aiub-english-club/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/@AIUBEnglishClub"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>About</h4>
+                <p>The AIUB English Club - Speak with Purpose. Grow with Us.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AIUB English Club. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        const events = [
+            {
+                image: '../Images/Events/englishquest.jpg',
+                title: 'English Quest',
+                date: '2024',
+                description: 'National linguistic competition for students to showcase their English skills and creativity.'
+            },
+            {
+                image: '../Images/Events/iftar.jpg',
+                title: 'Iftar Party',
+                date: '2024',
+                description: 'Community gathering and bonding session during Ramadan.'
+            },
+            {
+                image: '../Images/Events/english_reading.jpg',
+                title: 'English Reading Session',
+                date: '2024',
+                description: 'Interactive workshop to improve reading skills and comprehension.'
+            },
+            {
+                image: '../Images/Events/quizmania (1).jpg',
+                title: 'Quiz Mania',
+                date: '2024',
+                description: 'Exciting quiz competition testing knowledge of English language and literature.'
+            },
+            {
+                image: '../Images/Events/critique.jpg',
+                title: 'The Critique Showcase',
+                date: '2024',
+                description: 'A celebration of eloquence, creativity, and intellectual exploration.'
+            },
+            {
+                image: '../Images/Events/certificate.jpg',
+                title: 'Volunteer Certificates',
+                date: '2024',
+                description: 'Recognition and appreciation of volunteer members and their contributions.'
+            },
+            {
+                image: '../Images/Events/orientation (2).jpg',
+                title: 'Orientation Program',
+                date: '2024',
+                description: 'Welcome session for new members introducing club activities and opportunities.'
+            },
+            {
+                image: '../Images/Events/birthday.jpg',
+                title: 'Birthday Celebration',
+                date: '2024',
+                description: 'Fun gathering to celebrate the birth of our beloved club.'
+            }
+        ];
+
+        const grid = document.getElementById('eventsGrid');
+        events.forEach(event => {
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            card.innerHTML = `
+                <div class="event-image">
+                    <img src="${event.image}" alt="${event.title}">
+                    <div class="event-overlay"></div>
+                </div>
+                <div class="event-info">
+                    <h3>${event.title}</h3>
+                    <p class="event-date"><i class="fas fa-calendar"></i> ${event.date}</p>
+                    <p class="event-description">${event.description}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
